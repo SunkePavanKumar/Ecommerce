@@ -4,10 +4,15 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./Components/ErrorElement/Error.jsx";
-import Home from "./Components/Home.jsx";
-import About from "./Components/About.jsx";
-import Contact from "./Components/Contact.jsx";
-import Menu from "./Components/Menu.jsx";
+import Home from "./Components/Pages/Home.jsx";
+import About from "./Components/Pages/About.jsx";
+import Contact from "./Components/Pages/Contact.jsx";
+import Menu from "./Components/Pages/Menu.jsx";
+import NewProduct from "./Components/Pages/NewProduct.jsx";
+import Logout from "./Components/Pages/Logout.jsx";
+import SignUp from "./Components/Pages/SignUp.jsx";
+import TermsOfService from "./Components/Pages/TermsOfService.jsx";
+import PrivacyPolicy from "./Components/Pages/PrivacyPolicy.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +34,26 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/new-product",
+        element: <NewProduct />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/terms",
+        element: <TermsOfService />,
+      },
+      {
+        path: "/policy",
+        element: <PrivacyPolicy />,
       },
     ],
   },

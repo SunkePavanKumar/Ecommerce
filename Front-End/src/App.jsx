@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className=" pt-24">
+      <main className=" pt-24 bg-slate-100 max-h-max w-full">
         <Outlet />
       </main>
     </>
