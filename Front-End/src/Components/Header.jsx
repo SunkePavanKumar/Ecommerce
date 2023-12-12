@@ -50,10 +50,10 @@ function Header() {
                   New Product
                 </Link>
                 <Link
-                  to={"/logout"}
+                  to={"/login"}
                   className=" text-sm whitespace-nowrap cursor-pointer hover:bg-slate-200"
                 >
-                  Log out
+                  Log In
                 </Link>
               </div>
             )}

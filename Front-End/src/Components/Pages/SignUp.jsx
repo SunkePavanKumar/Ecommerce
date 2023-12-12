@@ -1,40 +1,110 @@
 import React, { useState } from "react";
 import { BiShow, BiSolidHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signUpImage from "../../assets/login-animation.gif";
-
+import { useRef } from "react";
+import ConvertBase64 from "../../Utiliity/ConvertBase64";
 function SignUp() {
-  let [show, setShow] = useState(true);
-  let [confirmShow, setConfirmShow] = useState(true);
+  let [show, setShow] = useState(false);
+  let [confirmShow, setConfirmShow] = useState(false);
+  const [input, setInput] = useState({});
+  let fullName = useRef(null);
+  let email = useRef(null);
+  let password = useRef(null);
+  let confirmPassword = useRef(null);
+  let navigator = useNavigate();
+
+  /**
+   * It is used for the password hide and show
+   */
   function displayShow() {
     show = !show;
     setShow(show);
   }
 
+  //   This is used for the confirm password hide and show
   function confirm() {
     confirmShow = !confirmShow;
     setConfirmShow(confirmShow);
   }
+
+  // On submition of the form to get the data
+
+  function createAccount(event) {
+    event.preventDefault();
+    const signUpData = {
+      fullName: fullName.current.value,
+      email: email.current.value,
+      password: password.current.value,
+      confirmPassword: confirmPassword.current.value,
+    };
+
+    console.log(signUpData);
+    if (
+      !signUpData.fullName ||
+      !signUpData.email ||
+      !signUpData.password ||
+      !signUpData.confirmPassword
+    ) {
+      [alert("Please! Enter the mandatory Fields")];
+    }
+
+    if (signUpData.password !== signUpData.confirmPassword) {
+      alert(`Password and Confirm  password doesnot match`);
+    } else {
+      setInput((prev) => ({ ...prev, ...signUpData }));
+      navigator("/login");
+      fullName.current.value = "";
+      email.current.value = "";
+      password.current.value = "";
+      confirmPassword.current.value = "";
+    }
+  }
+
+  // Handle the image
+
+  async function imageHandler(event) {
+    console.log(event);
+    console.log(event.target.value);
+    const data = await ConvertBase64(event.target.files[0]);
+    setInput((pre) => ({ ...pre, image: data }));
+  }
+
   return (
     <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-        <img
-          src={signUpImage}
-          alt="SignUp"
-          className=" relative h-16 bottom-5 left-32 shadow-md rounded-full"
-        />
-        <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+      <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full relative flex flex-col">
+        <label htmlFor="image" className="relative">
+          <img
+            src={!input.image ? signUpImage : input.image}
+            alt="SignUp"
+            className=" relative h-24 bottom-5 left-28 shadow-md top-0.5 right-5 cursor-pointer rounded-full p-1 object-contain"
+          />
+          <input
+            type="file"
+            className="hidden"
+            id="image"
+            accept="image/*"
+            onChange={imageHandler}
+          />
+          <p className=" absolute left-32 -bottom-1 ml-2  text-red-900 rounded-full">
+            upload
+          </p>
+        </label>
+
+        <h1 className="mb-8 text-3xl text-center relative">Sign up</h1>
         <input
           type="text"
           className="block border border-grey-light w-full p-3 rounded mb-4"
           name="fullname"
           placeholder="Full Name"
+          ref={fullName}
         />
         <input
           type="text"
           className="block border border-grey-light w-full p-3 rounded mb-4"
           name="email"
           placeholder="Email"
+          ref={email}
         />
         <div className="flex items-center justify-center relative">
           <input
@@ -42,6 +112,7 @@ function SignUp() {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="password"
             placeholder="Password"
+            ref={password}
           />
           {show ? (
             <div
@@ -65,6 +136,7 @@ function SignUp() {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="confirm_password"
             placeholder="Confirm Password"
+            ref={confirmPassword}
           />
           {confirmShow ? (
             <div
@@ -84,7 +156,8 @@ function SignUp() {
         </div>
         <button
           type="submit"
-          className="w-full text-center py-3 rounded  text-white hover:bg-green-dark focus:outline-none my-1 bg-green-500"
+          className="w-full text-center py-3 rounded  text-white hover:bg-green-dark focus:outline-none my-1 bg-red-500 hover:rounded-3xl"
+          onClick={createAccount}
         >
           Create Account
         </button>

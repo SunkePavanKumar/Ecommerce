@@ -9,7 +9,7 @@ import About from "./Components/Pages/About.jsx";
 import Contact from "./Components/Pages/Contact.jsx";
 import Menu from "./Components/Pages/Menu.jsx";
 import NewProduct from "./Components/Pages/NewProduct.jsx";
-import Logout from "./Components/Pages/Logout.jsx";
+import Login from "./Components/Pages/Login.jsx";
 import SignUp from "./Components/Pages/SignUp.jsx";
 import TermsOfService from "./Components/Pages/TermsOfService.jsx";
 import PrivacyPolicy from "./Components/Pages/PrivacyPolicy.jsx";
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
         element: <NewProduct />,
       },
       {
-        path: "/logout",
-        element: <Logout />,
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/signup",
