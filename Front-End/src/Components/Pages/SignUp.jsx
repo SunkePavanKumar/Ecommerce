@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import signUpImage from "../../assets/login-animation.gif";
 import { useRef } from "react";
 import ConvertBase64 from "../../Utiliity/ConvertBase64";
+import { postSignUpdata } from "../../BackendData/signUpdata";
+import toast from "react-hot-toast";
 function SignUp() {
   let [show, setShow] = useState(false);
   let [confirmShow, setConfirmShow] = useState(false);
@@ -30,7 +32,7 @@ function SignUp() {
 
   // On submition of the form to get the data
 
-  function createAccount(event) {
+  async function createAccount(event) {
     event.preventDefault();
     const signUpData = {
       fullName: fullName.current.value,
@@ -49,15 +51,25 @@ function SignUp() {
       [alert("Please! Enter the mandatory Fields")];
     }
 
+    if (signUpData.password.length < 6) {
+      toast.error("Password should be 6 characters 🙃");
+
+      return;
+    }
     if (signUpData.password !== signUpData.confirmPassword) {
-      alert(`Password and Confirm  password doesnot match`);
+      toast.error("Password and Confirm  password doesnot match 🙃");
     } else {
-      setInput((prev) => ({ ...prev, ...signUpData }));
-      navigator("/login");
-      fullName.current.value = "";
-      email.current.value = "";
-      password.current.value = "";
-      confirmPassword.current.value = "";
+      const signUpResponse = await postSignUpdata({ ...input, ...signUpData });
+      if (
+        !signUpResponse.data.success &&
+        signUpResponse.data.message === "User Already Exits"
+      ) {
+        toast.error("User Already Exist! Try to Login 🙃");
+        navigator("/login");
+      } else {
+        toast.success("Successfully Registered 👋");
+        navigator("/login");
+      }
     }
   }
 
@@ -177,9 +189,9 @@ function SignUp() {
       </div>
       <div className="text-grey-dark mt-6 mb-10">
         Already have an account?
-        <a className="no-underline border-blue-50 text-blue-700" href="/login">
+        <Link className="no-underline border-blue-50 text-blue-700" to="/login">
           Log in
-        </a>
+        </Link>
         .
       </div>
     </div>

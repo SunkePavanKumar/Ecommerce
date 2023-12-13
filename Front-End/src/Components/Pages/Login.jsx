@@ -3,6 +3,8 @@ import { BiShow, BiSolidHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import signUpImage from "../../assets/login-animation.gif";
 import { useRef } from "react";
+import { postLoginData } from "../../BackendData/loginData.js";
+import toast from "react-hot-toast";
 
 function Login() {
   let [show, setShow] = useState(false);
@@ -19,13 +21,23 @@ function Login() {
 
   // On submition of the form to get the data
 
-  function createAccount(event) {
+  async function loginAccount(event) {
     event.preventDefault();
-    const signUpData = {
+    const loginData = {
       email: email.current.value,
       password: password.current.value,
     };
-    console.log(signUpData);
+
+    if (!loginData.email || !loginData.password) {
+      toast.error("Enter the required details");
+      return;
+    }
+    const loginResponse = await postLoginData(loginData);
+    if (loginResponse.data.message === "Loged in successfully") {
+      toast.success("User Loged in Successfully 👋");
+    } else {
+      toast.error("Login Fail!Enter the correct details");
+    }
     email.current.value = "";
     password.current.value = "";
   }
@@ -74,7 +86,7 @@ function Login() {
         <button
           type="submit"
           className="w-full text-center py-3 rounded  text-white hover:bg-green-dark focus:outline-none my-1 bg-red-500 hover:rounded-3xl"
-          onClick={createAccount}
+          onClick={loginAccount}
         >
           Log In
         </button>
