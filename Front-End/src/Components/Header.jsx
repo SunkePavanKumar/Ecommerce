@@ -3,8 +3,11 @@ import logo from "../assets/logo.png";
 import { CgProfile } from "react-icons/cg";
 import { MdShoppingCart } from "react-icons/md";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const userData = useSelector((state) => state.userData);
+  console.log(userData);
   const [showprofile, setShowProfile] = useState(false);
 
   function showProfile() {
@@ -36,11 +39,19 @@ function Header() {
             </div>
           </div>
           <div
-            className="relative "
+            className="relative w-5  h-5"
             onMouseEnter={showProfile}
             onMouseLeave={closeProfile}
           >
-            <CgProfile className=" cursor-pointer " />
+            {userData.user.success ? (
+              <img
+                src={userData.user.data.image}
+                className=" w-6 h-6 rounded-full shadow-md border-solid border-slate-400 border-2"
+              />
+            ) : (
+              <CgProfile className=" cursor-pointer " />
+            )}
+
             {showprofile && (
               <div className=" absolute right-3 shadow-md z-50 py-2 px-2 bg-white flex flex-col">
                 <Link

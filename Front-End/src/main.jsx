@@ -13,6 +13,8 @@ import Login from "./Components/Pages/Login.jsx";
 import SignUp from "./Components/Pages/SignUp.jsx";
 import TermsOfService from "./Components/Pages/TermsOfService.jsx";
 import PrivacyPolicy from "./Components/Pages/PrivacyPolicy.jsx";
+import { Provider } from "react-redux";
+import { userStore } from "./store/userStore.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +63,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={userStore}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

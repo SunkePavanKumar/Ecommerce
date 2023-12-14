@@ -53,11 +53,11 @@ function SignUp() {
 
     if (signUpData.password.length < 6) {
       toast.error("Password should be 6 characters 🙃");
-
       return;
     }
     if (signUpData.password !== signUpData.confirmPassword) {
       toast.error("Password and Confirm  password doesnot match 🙃");
+      return;
     } else {
       const signUpResponse = await postSignUpdata({ ...input, ...signUpData });
       if (
@@ -66,9 +66,11 @@ function SignUp() {
       ) {
         toast.error("User Already Exist! Try to Login 🙃");
         navigator("/login");
+        return;
       } else {
         toast.success("Successfully Registered 👋");
         navigator("/login");
+        return;
       }
     }
   }

@@ -5,11 +5,16 @@ import signUpImage from "../../assets/login-animation.gif";
 import { useRef } from "react";
 import { postLoginData } from "../../BackendData/loginData.js";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userReducer } from "../../store/userSlice.js";
 
 function Login() {
+  const navigator = useNavigate();
   let [show, setShow] = useState(false);
   let email = useRef(null);
   let password = useRef(null);
+  const dispatch = useDispatch();
 
   /**
    * It is used for the password hide and show
@@ -35,8 +40,16 @@ function Login() {
     const loginResponse = await postLoginData(loginData);
     if (loginResponse.data.message === "Loged in successfully") {
       toast.success("User Loged in Successfully 👋");
+      dispatch(
+        userReducer({
+          type: "addData",
+          data: loginResponse.data,
+        })
+      );
+      navigator("/");
     } else {
       toast.error("Login Fail!Enter the correct details");
+      return;
     }
     email.current.value = "";
     password.current.value = "";
