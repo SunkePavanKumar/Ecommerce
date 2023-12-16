@@ -15,6 +15,7 @@ import TermsOfService from "./Components/Pages/TermsOfService.jsx";
 import PrivacyPolicy from "./Components/Pages/PrivacyPolicy.jsx";
 import { Provider } from "react-redux";
 import { userStore } from "./store/userStore.js";
+import Logout from "./Components/Pages/Logout.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
     ],
   },

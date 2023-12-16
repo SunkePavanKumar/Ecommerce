@@ -15,6 +15,9 @@ export const userSlice = createSlice({
       if (action.payload.type === "addData") {
         state.user = action.payload.data;
       }
+      if (action.payload.type === "logout") {
+        state.user = {};
+      }
     },
   },
 });

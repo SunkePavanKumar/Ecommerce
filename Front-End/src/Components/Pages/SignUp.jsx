@@ -91,7 +91,7 @@ function SignUp() {
           <img
             src={!input.image ? signUpImage : input.image}
             alt="SignUp"
-            className=" relative h-24 bottom-5 left-28 shadow-md top-0.5 right-5 cursor-pointer rounded-full p-1 object-contain"
+            className=" relative h-24 bottom-5 left-28 shadow-md top-0.5 right-5 cursor-pointer rounded-full p-1 object-contain overflow-hidden"
           />
           <input
             type="file"
