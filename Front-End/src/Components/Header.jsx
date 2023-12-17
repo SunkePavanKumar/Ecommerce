@@ -37,7 +37,7 @@ function Header() {
       <div className="flex items-center gap-10 md:mr-14 mr-7">
         <nav className="flex items-center  md:text-xl text-base md:gap-10 gap-2 text-slate-500">
           <Link to={"/"}>Home</Link>
-          <Link to={"/menu"}>Menu</Link>
+          <Link to={"/menu/Amaranthus"}>Menu</Link>
           <Link to={"/about"}>About</Link>
           <Link to={"/contact"}>Contact</Link>
         </nav>
