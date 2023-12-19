@@ -11,6 +11,8 @@ import { userReducer } from "../store/userSlice.js";
 function Header() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
+  const itemsInCart = useSelector((state) => state.products.cart);
+  const itemsLength = itemsInCart.length;
   console.log(userData);
   const [showprofile, setShowProfile] = useState(false);
 
@@ -43,9 +45,11 @@ function Header() {
         </nav>
         <div className="flex items-center justify-center md:gap-5 gap-2 text-slate-500 text-xl md:text-2xl">
           <div className="relative">
-            <MdShoppingCart className="z-50 cursor-pointer" />
+            <Link to={"/cart"}>
+              <MdShoppingCart className="z-50 cursor-pointer" />
+            </Link>
             <div className="cart absolute bg-red-500 text-center text-white -top-3 rounded-full text-sm right-1 opacity-80">
-              0
+              {itemsLength}
             </div>
           </div>
           <div

@@ -17,7 +17,6 @@ function Menu() {
   const dataToDisplay = data.filter(
     (item) => item.product_name === product_name
   );
-  console.log(dataToDisplay);
 
   function categoryFilter(itemName) {
     const newData = data.filter((item) => item.category === itemName);
@@ -81,22 +80,14 @@ function Menu() {
             <Loader />
           ) : (
             productData.map((products) => (
-              <Link
-                to={`/menu/${products.product_name}`}
+              <ProductCard
                 key={products.product_name}
-                onClick={window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })}
-              >
-                <ProductCard
-                  product_name={products.product_name}
-                  price={products.price}
-                  productImage={products.productImage}
-                  category={products.category}
-                  description={products.description}
-                />{" "}
-              </Link>
+                product_name={products.product_name}
+                price={products.price}
+                productImage={products.productImage}
+                category={products.category}
+                description={products.description}
+              />
             ))
           )}
         </div>
