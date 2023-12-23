@@ -130,20 +130,20 @@ function Home() {
         <p className=" text-xl font-bold bg-slate-500 w-36 px-5 rounded-full text-center text-white">
           Products
         </p>
-        <div className="flex md:flex-wrap gap-12 items-center justify-center overflow-aut scrollbar-hide">
+        <div className="flex md:flex-wrap md:gap-12 gap-8 items-center justify-center overflow-aut scrollbar-hide">
           {category.map((productName) => (
             <div key={productName} onClick={() => categoryFilter(productName)}>
-              <p className=" text-6xl mt-8 bg-red-500 max-w-[100px] items-center flex justify-center py-5 px-5 rounded-full text-white cursor-pointer">
+              <p className=" md:text-6xl text-3xl mt-8 bg-red-500 md:max-w-[100px] md:w-24 w-14 items-center flex justify-center md:py-5 md:px-5 py-2 px-2 rounded-full text-white cursor-pointer">
                 <GiForkKnifeSpoon />
               </p>
-              <p className="max-w-[100px] items-center flex justify-center mt-2 rounded-full text-slate-600 font-bold">
+              <p className="md:max-w-[100px] items-center flex justify-center mt-2 rounded-full text-slate-600 font-bold">
                 {productName}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="flex md:flex-wrap relative top-5 gap-4 bottom-5 items-center justify-center overflow-auto scrollbar-hide">
+        <div className="flex flex-wrap relative top-5 gap-4 bottom-5 items-center justify-center overflow-auto scrollbar-hide">
           {data.length === 0 ? (
             <Loader />
           ) : (
@@ -158,7 +158,7 @@ function Home() {
                   productImage={products.productImage}
                   category={products.category}
                   description={products.description}
-                />{" "}
+                />
               </Link>
             ))
           )}
