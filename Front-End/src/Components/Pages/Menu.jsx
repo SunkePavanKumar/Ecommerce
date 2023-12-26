@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loader from "../Loader.jsx";
-import ProductCard from "../productCard.jsx";
+import ProductCard from "../ProductCard.jsx";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { addToCart } from "../../store/productSlice.js";
 import toast from "react-hot-toast";

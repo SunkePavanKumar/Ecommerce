@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import HomeCard from "../HomeCard";
 import { useSelector } from "react-redux";
 import Loader from "../Loader.jsx";
-import ProductCard from "./../ProductCard.jsx";
+import ProductCard from "../ProductCard.jsx";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { Link } from "react-router-dom";
