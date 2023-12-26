@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader.jsx";
-import ProductCard from "../ProductCard.jsx";
+import ProductCard from "../ProductCard";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { addToCart } from "../../store/productSlice.js";
 import toast from "react-hot-toast";
