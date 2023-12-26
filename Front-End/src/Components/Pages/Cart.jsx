@@ -1,7 +1,6 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import CartProduct from "../cartProduct";
-import EmptyCart from "../EmptyCart";
+import CartProduct from "../CartProduct.jsx";
+import EmptyCart from "../EmptyCart.jsx";
 
 function Cart() {
   const data = useSelector((state) => state.products.cart);
