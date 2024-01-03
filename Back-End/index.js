@@ -19,7 +19,7 @@ try {
 }
 
 try {
-  mongoose.connect(process.env.DB_URL);
+  await mongoose.connect(process.env.DB_URL);
   console.log(`connected to the database successfully`);
 } catch (error) {
   console.log(`Error while connecting to the database, error : ${error}`);

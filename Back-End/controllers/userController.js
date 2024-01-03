@@ -1,13 +1,12 @@
 import { userModel } from "../Models/userSchema.js";
+import bcrypt from "bcrypt";
 
 export async function signUp(req, res) {
   try {
     console.log(req.body);
+    const { email, password } = req.body;
     req.body.startTs = new Date().toLocaleDateString();
-    const signUpdata = await userModel
-      .find({ email: req.body.email })
-      .lean()
-      .exec();
+    const signUpdata = await userModel.find({ email: email }).lean().exec();
     if (signUpdata && signUpdata.length > 0) {
       res.send({
         success: false,
@@ -15,6 +14,9 @@ export async function signUp(req, res) {
         data: signUpdata[0],
       });
     } else {
+      const hashedPassword = bcrypt.hashSync(password, 10);
+      req.body.password = hashedPassword;
+      req.body.confirmPassword = hashedPassword;
       await userModel.create(req.body);
       const message = {
         success: true,
@@ -34,22 +36,25 @@ export async function signUp(req, res) {
 
 export async function login(req, res) {
   console.log(req.body);
+  let { email, password } = req.body;
   const userData = await userModel.aggregate([
     {
-      $match: { email: req.body.email, password: req.body.password },
+      $match: { email: email },
     },
   ]);
+
   console.log(userData);
-  if (userData.length > 0) {
+
+  if (!bcrypt.compareSync(password, userData[0].password) || !userData) {
     res.send({
-      success: true,
-      message: "Loged in successfully",
+      success: false,
+      message: "Login Fail",
       data: userData[0],
     });
   } else {
     res.send({
-      success: false,
-      message: "Login Fail",
+      success: true,
+      message: "Loged in successfully",
       data: userData[0],
     });
   }
