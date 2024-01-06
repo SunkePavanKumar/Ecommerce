@@ -1,8 +1,16 @@
 import { useSelector } from "react-redux";
 import CartProduct from "../CartProduct.jsx";
 import EmptyCart from "../EmptyCart.jsx";
+import { checkoutProduct } from "../../BackendData/checkout.js";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const [loading, setLoading] = useState(false);
+  const navigator = useNavigate();
+  const userData = useSelector((state) => state.userData);
   const data = useSelector((state) => state.products.cart);
   let subTotal = 0;
   let shipping = 30;
@@ -13,6 +21,42 @@ function Cart() {
   // return data.map((items) => (
   //   <CartProduct items={items} key={items.product_name} />
   // ));
+
+  // implement the stripe Integration
+
+  async function handleCheckout(e) {
+    let key = "data";
+    let user = userData.user;
+    if (!(key in user)) {
+      toast.error("login to checkout!");
+      setTimeout(() => {
+        navigator("/login");
+      }, 1000);
+      return;
+    }
+    const stripePromise = await loadStripe(
+      "pk_test_51OUjhESHAusPJJcIusdlWHyaSzWIYvvS6nvlVaNQFGvtzYTOoCrJeanPUYS3fASX8pVVfQaAWulN0vhezEvUR20c007mgR2fp5"
+    );
+    e.preventDefault();
+    setLoading(true);
+    let checkoutData = {
+      data,
+      shipping,
+      subTotal,
+    };
+
+    const response = await checkoutProduct(checkoutData);
+    if (!response.data.success) {
+      toast.error("Payment Failed 😥");
+    } else {
+      toast.success("Redirect to the payment gateway 👏");
+      stripePromise.redirectToCheckout({
+        sessionId: response.data.session,
+      });
+      setLoading(false);
+    }
+  }
+
   return data.length == 0 ? (
     <EmptyCart />
   ) : (
@@ -58,8 +102,11 @@ function Cart() {
                   &#8377;{subTotal - shipping}
                 </span>
               </div>
-              <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
-                Checkout
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-cyan-500"
+                onClick={handleCheckout}
+              >
+                {!loading ? "Checkout" : "loading..."}
               </button>
             </div>
           </div>

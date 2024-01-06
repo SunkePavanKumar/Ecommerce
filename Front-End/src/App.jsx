@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     async function products() {
       const prodcutsData = await getProducts();
-      console.log(prodcutsData.data);
       dispatch(getAllProducts(prodcutsData.data));
     }
 

@@ -6,9 +6,10 @@ import ProductCard from "./ProductCard.jsx";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { addToCart } from "../../store/productSlice.js";
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 function Menu() {
   let data = useSelector((state) => state.products.productData);
+  const navigator = useNavigate();
   const [productData, setProductData] = useState([...data]);
   const category = [...new Set(data.map((item) => item.category))];
   const itemsInCart = useSelector((state) => state.products.cart);
@@ -49,6 +50,29 @@ function Menu() {
       toast.error("Item Already Exists in Cart!✋");
     }
   }
+
+  function handleBuy() {
+    const checkItem = itemsInCart.filter(
+      (items) => items.product_name === dataToDisplay[0].product_name
+    );
+    if (checkItem.length === 0) {
+      dispatch(
+        addToCart({
+          product_name: dataToDisplay[0].product_name,
+          price: dataToDisplay[0].price,
+          productImage: dataToDisplay[0].productImage,
+          category: dataToDisplay[0].category,
+          description: dataToDisplay[0].description,
+          quantity: 1,
+        })
+      );
+      toast.success("Added to Cart!");
+    } else {
+      toast.error("Item Already Exists in Cart!✋");
+    }
+
+    navigator("/cart");
+  }
   return dataToDisplay.length === 0 ||
     dataToDisplay === undefined ||
     dataToDisplay === null ? (
@@ -76,7 +100,10 @@ function Menu() {
                 {dataToDisplay[0].description}
               </p>
               <div className="flex justify-between items-center gap-4">
-                <button className="bg-blue-600 px-5 py-3 text-white rounded-lg w-2/4 text-center md:w-full">
+                <button
+                  className="bg-blue-600 px-5 py-3 text-white rounded-lg w-2/4 text-center md:w-full"
+                  onClick={handleBuy}
+                >
                   Buy
                 </button>
                 <button
