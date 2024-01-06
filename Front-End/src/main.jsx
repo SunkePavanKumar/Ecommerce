@@ -17,7 +17,7 @@ import { Provider } from "react-redux";
 import { userStore } from "./store/userStore.js";
 import Logout from "./Components/Pages/Logout.jsx";
 import Cart from "./Components/Pages/Cart.jsx";
-import PayementSuccess from "./Components/Pages/payementSuccess.jsx";
+import PayementSuccess from "./Components/Pages/PayementSuccess.jsx";
 import PayementFail from "./Components/Pages/PayementFail.jsx";
 
 const router = createBrowserRouter([
