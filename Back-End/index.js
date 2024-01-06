@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(cros());
 
-// Linsten to the server
+// Listen to the server
 app.use("/", router);
 const PORT = process.env.PORT || 3000;
 
