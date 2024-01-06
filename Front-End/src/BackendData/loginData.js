@@ -2,10 +2,11 @@ import axios from "axios";
 
 export async function postLoginData(loginData) {
   try {
+    let endpoint = "https://ecommerce-backend-i8bv.onrender.com";
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:8000/login",
+      url: `${endpoint}/login`,
       headers: {
         "Content-Type": "application/json",
       },

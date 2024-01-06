@@ -2,10 +2,11 @@ import axios from "axios";
 
 export async function checkoutProduct(checkoutData) {
   try {
+    let endpoint = "https://ecommerce-backend-i8bv.onrender.com";
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:8000/checkout-product",
+      url: `${endpoint}/checkout-product`,
       headers: {
         "Content-Type": "application/json",
       },

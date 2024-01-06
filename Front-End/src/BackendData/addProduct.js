@@ -1,13 +1,7 @@
 import axios from "axios";
 
 export async function addProduct(productData) {
-  let endpoint = "";
-  let enviroment = import.meta.env.DEVELOPMENT;
-  if (enviroment === "PROD") {
-    endpoint = import.meta.env.PROD_URL;
-  } else {
-    endpoint = import.meta.env.DEVELOPMENT;
-  }
+  let endpoint = "https://ecommerce-backend-i8bv.onrender.com";
   try {
     let config = {
       method: "post",
