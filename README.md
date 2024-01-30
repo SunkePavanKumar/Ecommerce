@@ -48,10 +48,10 @@ Our E-commerce application is designed to provide users with a seamless online s
 - **Backend:**
   - Node.js
   - Express.js
-  - MongoDB (or your preferred database)
+  - MongoDB 
 
 - **Payment Integration:**
-  - [Payment Gateway Name]
+  - Stripe Integration
 
 ## Installation
 
@@ -65,5 +65,7 @@ Our E-commerce application is designed to provide users with a seamless online s
 2. Start the React.js application: `npm start` or `yarn start`.
 3. Access the application in your browser: `http://localhost:3000`.
 
-
+## Demo
+1. Link : https://ecommerce-lovat-three.vercel.app/
+2. For Better Experience view in the desktop.
 
