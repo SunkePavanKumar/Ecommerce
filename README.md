@@ -44,6 +44,7 @@ Our E-commerce application is designed to provide users with a seamless online s
 - **Frontend:**
   - React.js
   - State management with React Context API
+  - Redux Tool Kit
 
 - **Backend:**
   - Node.js
