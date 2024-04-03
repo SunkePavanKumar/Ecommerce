@@ -71,7 +71,7 @@ function Header() {
                 {userData &&
                 userData.user &&
                 userData.user.data &&
-                userData.user.data.email === "ammu@gmail.com" ? (
+                userData.user.data.email === "pavan.1413489@gmail.com" ? (
                   <Link
                     to={"/new-product"}
                     className=" text-sm whitespace-nowrap cursor-pointer hover:bg-slate-200"

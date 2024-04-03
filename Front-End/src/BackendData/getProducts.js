@@ -2,7 +2,8 @@ import axios from "axios";
 
 export async function getProducts() {
   try {
-    let endpoint = "https://ecommerce-backend-i8bv.onrender.com";
+    // let endpoint = "https://ecommerce-backend-i8bv.onrender.com";
+    let endpoint = "http://localhost:8000";
     let config = {
       method: "get",
       maxBodyLength: Infinity,
